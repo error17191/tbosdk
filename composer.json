@@ -1,0 +1,12 @@
+{
+    "name": "syaltech/tbosdk",
+    "description": "SDK to handle TBO requests",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mohamed Ahmed",
+            "email": "error17191@gmail.com"
+        }
+    ],
+    "require": {}
+}
