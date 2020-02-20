@@ -6,18 +6,20 @@ namespace TBO\Request;
 
 abstract class RequestHandler
 {
-    protected $credintials;
+    protected $username;
+    protected $password;
     protected $mode;
 
-    public function __construct($credintails, $mode)
+    public function __construct($username, $password, $mode)
     {
-        $this->credintials = $credintails;
+        $this->username = $username;
+        $this->password = $password;
         $this->mode = $mode;
     }
 
     public function buildRequest($data)
     {
-
+        $innerXML = $this->buildRequestBody($data);
     }
 
     public function sendRequest()
