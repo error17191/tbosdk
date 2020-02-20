@@ -8,5 +8,10 @@
             "email": "error17191@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "TBO\\" : "src/"
+        }
+    },
     "require": {}
 }
