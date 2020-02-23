@@ -10,8 +10,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "TBO\\" : "src/"
+            "TBO\\" : "src/",
+            "Tests\\" : "tests/"
         }
     },
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
 }
