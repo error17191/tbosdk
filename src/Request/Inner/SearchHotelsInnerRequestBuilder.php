@@ -4,27 +4,12 @@
 namespace TBO\Request\Inner;
 
 
-use TBO\Traits\XMLHelpersTrait;
+
+use TBO\Support\XML;
 
 class SearchHotelsInnerRequestBuilder implements InnerRequestBuilder
 {
-    use XMLHelpersTrait;
-
-
-    public function build($data)
-    {
-        // TODO: Implement build() method.
-    }
-
-    public function xml()
-    {
-        // TODO: Implement xml() method.
-    }
-
-    protected function getBasicRequestBody()
-    {
-        return
-            '
+    protected $template = '
                     <hot:HotelSearchRequest>
                         <hot:CheckInDate id="checkin">today</hot:CheckInDate>
                         <hot:CheckOutDate id="checkout">tomorrow</hot:CheckOutDate>
@@ -42,5 +27,69 @@ class SearchHotelsInnerRequestBuilder implements InnerRequestBuilder
                         </hot:Filters>
                     </hot:HotelSearchRequest>
                 ';
+    /**
+     * @var \TBO\Support\XML
+     */
+    protected $xml;
+
+    public function build($data)
+    {
+        $this->xml = new XML($this->template);
+        $this->xml->setById('checkin',$data['checkin']);
+        $this->xml->setById('checkout',$data['checkout']);
+        $this->xml->setById('nationality',$data['nationality']);
+        $this->xml->setById('no_rooms',$data['no_rooms']);
+        $this->xml->setById('country_name',$data['country_name']);
+        $this->xml->setById('city_name',$data['city_name']);
+        $this->xml->setById('city_id',$data['city_id']);
+        $roomsDom = $this->xml->getElementById('room_guests');
+        foreach ($data['rooms'] as $room) {
+            $roomsDom->appendChild($this->buildRoomDomElement($room));
+        }
+        $roomsDom->removeAttribute('id');
+        !empty($data['hotel_code_list']) ?
+            $this->xml->setById('hotel_code_list', $data['hotel_code_list']) :
+            $this->xml->removeElementById('hotel_code_list');
+        !empty($data['star_rating']) ?
+            $this->xml->setById('star_rating',$this->mapStarRating($data['star_rating'])) :
+            $this->xml->setById('star_rating','All');
+    }
+
+    public function xml()
+    {
+        return $this->xml->getXML();
+    }
+
+    protected function buildRoomDomElement($room)
+    {
+        $roomDom = $this->xml->createElement('RoomGuest');
+        $roomDom->setAttribute('AdultCount', $room['adults']);
+        $roomDom->setAttribute('ChildCount',
+            isset($room['children_ages']) ? count($room['children_ages']) : 0);
+        if (!isset($room['children_ages'])) {
+            return $roomDom;
+        }
+        $agesDom = $this->xml->createElement('ChildAge');
+        $roomDom->appendChild($agesDom);
+
+        foreach ($room['children_ages'] as $age) {
+            $agesDom->appendChild($this->xml->createElement('int', $age));
+        }
+        return $roomDom;
+    }
+
+    protected function toStarsInteger($rating)
+    {
+        $replacements = [
+            'Star' => '',
+            'One' => 1,
+            'Two' => 2,
+            'Three' => 3,
+            'Four' => 4,
+            'Five' => 5,
+            'Zero' => 0,
+            'No' => 0
+        ];
+        return (int)(str_replace(array_keys($replacements), array_values($replacements), $rating));
     }
 }
