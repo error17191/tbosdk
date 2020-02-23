@@ -5,15 +5,15 @@ namespace Tests\Request;
 
 
 use PHPUnit\Framework\TestCase;
-use TBO\Request\Inner\SearchInnerRequestBuilder;
+use TBO\Request\Inner\SearchHotelsInnerRequestBuilder;
 
-class SearchInnerRequestBuilderTest extends TestCase
+class SearchHotelsInnerRequestBuilderTest extends TestCase
 {
     use SearchRequestSamples;
 
     public function testCanBuildRequestForSingleRoomSingleAdult()
     {
-        $builder = new SearchInnerRequestBuilder();
+        $builder = new SearchHotelsInnerRequestBuilder();
         $builder->build([
             'CheckInDate' => '2019-02-14',
             'CheckOutDate' => '2019-02-17',
