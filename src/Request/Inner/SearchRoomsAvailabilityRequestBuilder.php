@@ -6,7 +6,7 @@ namespace TBO\Request\Inner;
 use TBO\Support\XML;
 
 /**
- * Class SearchHotelsInnerRequestBuilder
+ * Class SearchRoomsAvailabilityRequestBuilder
  * @package TBO\Request\Inner
  *
  * @property XML $xml
