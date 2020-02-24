@@ -5,16 +5,36 @@ namespace TBO\Support;
 
 class XML
 {
+    /**
+     * @var \DOMDocument
+     */
     protected $xmlDoc;
-    protected $xPath;
-    protected $xmlTemplate;
 
-    public function __construct($xmlTemplate)
+    /**
+     * @var \DOMXPath
+     */
+    protected $xPath;
+
+    /**
+     * @var string
+     */
+    protected $XMLString;
+
+    public function __construct($XMLString)
     {
-        $this->xmlTemplate = $xmlTemplate;
+        $this->XMLString = $XMLString;
+    }
+
+    public function build()
+    {
         $this->xmlDoc = new \DOMDocument();
-        $this->xmlDoc->loadXML($this->xmlTemplate);
+        $this->xmlDoc->loadXML($this->XMLString);
         $this->xPath = new \DOMXPath($this->xmlDoc);
+    }
+
+    public function replace($XMLReplace,$replace = 'replace')
+    {
+        $this->XMLString = str_replace($replace,$XMLReplace,$this->XMLString);
     }
 
     public function getElementById($id)
