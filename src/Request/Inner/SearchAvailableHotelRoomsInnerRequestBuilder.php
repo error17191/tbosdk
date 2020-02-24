@@ -6,12 +6,12 @@ namespace TBO\Request\Inner;
 use TBO\Support\XML;
 
 /**
- * Class SearchRoomsAvailabilityRequestBuilder
+ * Class SearchAvailableHotelRoomsInnerRequestBuilder
  * @package TBO\Request\Inner
  *
  * @property XML $xml
  */
-class SearchRoomsAvailabilityRequestBuilder extends InnerRequestBuilder
+class SearchAvailableHotelRoomsInnerRequestBuilder extends InnerRequestBuilder
 {
 
     protected function build($data)
