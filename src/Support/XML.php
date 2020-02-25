@@ -65,6 +65,9 @@ class XML
     public function setById(string $id,string $textContent,bool $keepId = false)
     {
         $dom = $this->getElementById($id);
+        if(!$dom){
+            return;
+        }
         $dom->textContent = $textContent;
         if (!$keepId) {
             $dom->removeAttribute('id');
@@ -84,11 +87,14 @@ class XML
      * @param string $id
      * @param bool $keepId
      * @param bool $keepElement
-     * @return \DOMElement
+     * @return \DOMElement|void
      */
     public function cloneElementById(string $id, bool  $keepId = false, bool $keepElement = false)
     {
         $element = $this->getElementById($id);
+        if(!$element){
+            return;
+        }
         if (!$keepId) {
             $element->removeAttribute('id');
         }
@@ -106,6 +112,9 @@ class XML
     public function removeElementById(string $id)
     {
         $element = $this->getElementById($id);
+        if(!$element){
+            return;
+        }
         $this->removeElement($element);
     }
 
@@ -117,6 +126,9 @@ class XML
     public function setElementAttributesById(array $attributes,string  $id,bool $keepId = false)
     {
         $element = $this->getElementById($id);
+        if(!$element){
+            return;
+        }
         $this->setElementAttributes($attributes, $element, $keepId);
     }
 

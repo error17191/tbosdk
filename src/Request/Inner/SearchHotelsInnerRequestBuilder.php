@@ -15,33 +15,30 @@ class SearchHotelsInnerRequestBuilder extends InnerRequestBuilder
 {
     public function build($data)
     {
-        $this->xml->setById('checkin', $data['checkin']);
-        $this->xml->setById('checkout', $data['checkout']);
-        $this->xml->setById('nationality', $data['nationality']);
-        $this->xml->setById('no_rooms', $data['no_rooms']);
-        $this->xml->setById('country_name', $data['country_name']);
-        $this->xml->setById('city_name', $data['city_name']);
-        $this->xml->setById('city_id', $data['city_id']);
-        $roomsDom = $this->xml->getElementById('room_guests');
-        foreach ($data['rooms'] as $room) {
+        $roomsDom = $this->xml->getElementById('RoomGuests');
+        foreach ($data['Rooms'] as $room) {
             $roomsDom->appendChild($this->buildRoomDomElement($room));
         }
         $roomsDom->removeAttribute('id');
+        unset($data['Rooms']);
+        foreach ($data as $key => $value) {
+            $this->xml->setById($key,$value);
+        }
     }
 
     protected function buildRoomDomElement($room)
     {
         $roomDom = $this->xml->createElement('RoomGuest');
-        $roomDom->setAttribute('AdultCount', $room['adults']);
+        $roomDom->setAttribute('AdultCount', $room['AdultCount']);
         $roomDom->setAttribute('ChildCount',
-            isset($room['children_ages']) ? count($room['children_ages']) : 0);
-        if (!isset($room['children_ages'])) {
+            isset($room['ChildrenAges']) ? count($room['ChildrenAges']) : 0);
+        if (!isset($room['ChildrenAges'])) {
             return $roomDom;
         }
         $agesDom = $this->xml->createElement('ChildAge');
         $roomDom->appendChild($agesDom);
 
-        foreach ($room['children_ages'] as $age) {
+        foreach ($room['ChildrenAges'] as $age) {
             $agesDom->appendChild($this->xml->createElement('int', $age));
         }
         return $roomDom;
@@ -51,19 +48,16 @@ class SearchHotelsInnerRequestBuilder extends InnerRequestBuilder
     {
         return '
               <hot:HotelSearchRequest>
-                        <hot:CheckInDate id="checkin">today</hot:CheckInDate>
-                        <hot:CheckOutDate id="checkout">tomorrow</hot:CheckOutDate>
-                        <hot:GuestNationality id="nationality">EG</hot:GuestNationality>
-                        <hot:NoOfRooms id="no_rooms">1</hot:NoOfRooms>
-                        <hot:CountryName id="country_name">Afghanistan</hot:CountryName>
-                        <hot:CityName id="city_name">Bost</hot:CityName>
-                        <hot:CityId id="city_id">148838</hot:CityId>
-                        <hot:RoomGuests id="room_guests">
+                        <hot:CheckInDate id="CheckInDate">today</hot:CheckInDate>
+                        <hot:CheckOutDate id="CheckOutDate">tomorrow</hot:CheckOutDate>
+                        <hot:GuestNationality id="GuestNationality">EG</hot:GuestNationality>
+                        <hot:NoOfRooms id="NoOfRooms">1</hot:NoOfRooms>
+                        <hot:CountryName id="CountryName">Afghanistan</hot:CountryName>
+                        <hot:CityName id="CityName"></hot:CityName>
+                        <hot:CityId id="CityId">148838</hot:CityId>
+                        <hot:RoomGuests id="RoomGuests">
                         </hot:RoomGuests>
-                        <hot:ResultCount>0</hot:ResultCount>
-                        <hot:Filters>
-                            <hot:StarRating>All</hot:StarRating>
-                        </hot:Filters>                 
+                        <hot:ResultCount>0</hot:ResultCount>                                  
                     </hot:HotelSearchRequest>
         ';
     }
