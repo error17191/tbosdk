@@ -19,11 +19,44 @@ trait SearchRequestSamples
                         <hot:RoomGuests>
                             <hot:RoomGuest AdultCount="1" ChildCount="0"/>
                         </hot:RoomGuests>
-                        <hot:ResultCount>0</hot:ResultCount>
-                        <hot:Filters>
-                            <hot:StarRating>All</hot:StarRating>
-                        </hot:Filters>
                     </hot:HotelSearchRequest>';
+    }
+
+    private function xmlSampleSingleRoomMultipleAdults()
+    {
+        return '
+                    <hot:HotelSearchRequest>
+                        <hot:CheckInDate>2020-03-17</hot:CheckInDate>
+                        <hot:CheckOutDate>2020-03-20</hot:CheckOutDate>
+                        <hot:GuestNationality>EG</hot:GuestNationality>
+                        <hot:NoOfRooms>1</hot:NoOfRooms>
+                        <hot:CountryName>France</hot:CountryName>
+                        <hot:CityName>Paris</hot:CityName>
+                        <hot:CityId>131408</hot:CityId>
+                        <hot:RoomGuests>
+                            <hot:RoomGuest AdultCount="3" ChildCount="0"/>
+                        </hot:RoomGuests>
+                    </hot:HotelSearchRequest>
+        ';
+    }
+
+    private function xmlSampleWithMultipleRooms()
+    {
+        return '
+                    <hot:HotelSearchRequest>
+                        <hot:CheckInDate>2020-03-17</hot:CheckInDate>
+                        <hot:CheckOutDate>2020-03-20</hot:CheckOutDate>
+                        <hot:GuestNationality>EG</hot:GuestNationality>
+                        <hot:NoOfRooms>2</hot:NoOfRooms>
+                        <hot:CountryName>France</hot:CountryName>
+                        <hot:CityName>Paris</hot:CityName>
+                        <hot:CityId>131408</hot:CityId>
+                        <hot:RoomGuests>
+                            <hot:RoomGuest AdultCount="3" ChildCount="0"/>
+                            <hot:RoomGuest AdultCount="4" ChildCount="0"/>
+                        </hot:RoomGuests>
+                    </hot:HotelSearchRequest>
+        ';
     }
 
 }
