@@ -36,4 +36,79 @@ class SearchInnerRequestBuilderTest extends TestCase
 
     }
 
+    public function testCanBuildRequestSingleRoomMultipleAdults()
+    {
+        $builder = new SearchInnerRequestBuilder();
+        $builder->build([
+            'CheckInDate' => '2020-03-17',
+            'CheckOutDate' => '2020-03-20',
+            'CityName' => 'Paris',
+            'CityId' => '131408',
+            'CountryName' => 'France',
+            'GuestNationality' => 'EG',
+            'Rooms' => [
+                [
+                    "AdultCount" => 3
+                ]
+            ],
+            'Filters' => [
+                "StarRating" => 'All'
+            ],
+
+        ]);
+
+        $this->assertXmlStringEqualsXmlString($this->xmlSampleSingleRoomMultipleAdults(), $builder->xml());
+    }
+
+    public function testCanBuildRequestWithMultipleRooms()
+    {
+        $builder = new SearchInnerRequestBuilder();
+        $builder->build([
+            'CheckInDate' => '2020-03-17',
+            'CheckOutDate' => '2020-03-20',
+            'CityName' => 'Paris',
+            'CityId' => '131408',
+            'CountryName' => 'France',
+            'GuestNationality' => 'EG',
+            'Rooms' => [
+                [
+                    "AdultCount" => 3
+                ],
+                [
+                    "AdultCount" => 4
+                ],
+            ],
+            'Filters' => [
+                "StarRating" => 'All'
+            ],
+
+        ]);
+
+    }
+
+    public function testCanBuildRequestWithChildren()
+    {
+        $builder = new SearchInnerRequestBuilder();
+        $builder->build([
+            'CheckInDate' => '2020-03-17',
+            'CheckOutDate' => '2020-03-20',
+            'CityName' => 'Paris',
+            'CityId' => '131408',
+            'CountryName' => 'France',
+            'GuestNationality' => 'EG',
+            'Rooms' => [
+                [
+                    "AdultCount" => 3
+                ],
+                [
+                    "AdultCount" => 4
+                ],
+            ],
+            'Filters' => [
+                "StarRating" => 'All'
+            ],
+
+        ]);
+
+    }
 }
