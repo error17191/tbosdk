@@ -58,6 +58,15 @@ class XML
     }
 
     /**
+     * @param string $attribute
+     * @return \DOMNodeList|false
+     */
+    public function getElementsByAttribute(string $attribute = 'id')
+    {
+        return $this->xPath->query("//*[@$attribute]");
+    }
+
+    /**
      * @param string $id
      * @param string $textContent
      * @param bool $keepId

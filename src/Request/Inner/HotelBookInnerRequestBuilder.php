@@ -95,17 +95,17 @@ class HotelBookInnerRequestBuilder extends InnerRequestBuilder
     {
         return '
              <hot:HotelBookRequest>       
-                <hot:ClientReferenceNumber id="client_reference_number"></hot:ClientReferenceNumber>       
-                <hot:GuestNationality id="guest_nationality"></hot:GuestNationality>       
-                <hot:Guests id="guests">         
-                    <hot:Guest id="guest" LeadGuest="" GuestType="" GuestInRoom="">           
-                        <hot:Title id="title"></hot:Title>           
-                        <hot:FirstName id="first_name"></hot:FirstName>
-                        <hot:LastName id="last_name"></hot:LastName>           
-                        <hot:Age id="age"></hot:Age> 
+                <hot:ClientReferenceNumber id="ClientReferenceNumber"></hot:ClientReferenceNumber>       
+                <hot:GuestNationality id="GuestNationality"></hot:GuestNationality>       
+                <hot:Guests id="Guests">         
+                    <hot:Guest id="Guest" LeadGuest="" GuestType="" GuestInRoom="">           
+                        <hot:Title id="Title"></hot:Title>           
+                        <hot:FirstName id="FirstName"></hot:FirstName>
+                        <hot:LastName id="LastName"></hot:LastName>           
+                        <hot:Age id="Age"></hot:Age> 
                     </hot:Guest> 
                 </hot:Guests>     
-                <hot:PaymentInfo id="payment_info" VoucherBooking="" PaymentModeType="Limit"> 
+                <hot:PaymentInfo id="PaymentInfo" VoucherBooking="" PaymentModeType="Limit"> 
                 </hot:PaymentInfo>       
                 <hot:SessionId id="session_id"></hot:SessionId>
                 <hot:NoOfRooms id="no_of_rooms"></hot:NoOfRooms>       

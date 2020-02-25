@@ -20,10 +20,13 @@ class SearchHotelsInnerRequestBuilder extends InnerRequestBuilder
             $roomsDom->appendChild($this->buildRoomDomElement($room));
         }
         $roomsDom->removeAttribute('id');
-        unset($data['Rooms']);
-        foreach ($data as $key => $value) {
-            $this->xml->setById($key,$value);
+        if(!empty($data['Filters'])){
+            $this->setDataToXML($data['Filters']);
         }
+        unset($data['Filters']);
+        unset($data['Rooms']);
+        $this->setDataToXML($data);
+        $this->removeUnusedKeysInRequest();
     }
 
     protected function buildRoomDomElement($room)
@@ -57,7 +60,10 @@ class SearchHotelsInnerRequestBuilder extends InnerRequestBuilder
                         <hot:CityId id="CityId">148838</hot:CityId>
                         <hot:RoomGuests id="RoomGuests">
                         </hot:RoomGuests>
-                        <hot:ResultCount>0</hot:ResultCount>                                  
+                        <hot:ResultCount>0</hot:ResultCount>
+                        <hot:Filters>
+                            <hot:StarRating id="StarRating">All</hot:StarRating>
+                        </hot:Filters>                                  
                     </hot:HotelSearchRequest>
         ';
     }

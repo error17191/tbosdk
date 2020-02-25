@@ -25,6 +25,21 @@ abstract class InnerRequestBuilder
 
     abstract protected function initialXML();
 
+    protected function setDataToXML(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $this->xml->setById($key,$value);
+        }
+    }
+
+    protected function removeUnusedKeysInRequest()
+    {
+        $elements = $this->xml->getElementsByAttribute();
+        foreach ($elements as $element) {
+            $this->xml->removeElement($element);
+        }
+    }
+
     public function xml()
     {
         return $this->xml->getXML();
