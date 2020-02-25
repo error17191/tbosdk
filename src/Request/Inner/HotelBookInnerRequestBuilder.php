@@ -33,6 +33,7 @@ class HotelBookInnerRequestBuilder extends InnerRequestBuilder
         }
         unset($data['HotelRooms']);
         $this->setDataToXML($data);
+        $this->removeUnusedKeysInRequest();
     }
 
     private function guestNodes()
