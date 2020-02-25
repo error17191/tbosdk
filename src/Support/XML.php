@@ -86,7 +86,7 @@ class XML
      * @param bool $keepElement
      * @return \DOMElement
      */
-    public function createCloneElementById(string $id,bool  $keepId = false,bool $keepElement = false)
+    public function cloneElementById(string $id, bool  $keepId = false, bool $keepElement = false)
     {
         $element = $this->getElementById($id);
         if (!$keepId) {
@@ -152,7 +152,7 @@ class XML
     /**
      * @return \DOMDocument
      */
-    public function getDomXml()
+    public function getDomXML()
     {
         return $this->xmlDoc;
     }

@@ -17,7 +17,7 @@ class HotelBookInnerRequestBuilder extends InnerRequestBuilder
         $this->xml->setById('client_reference_number',$data['client_reference_number']);
         $this->xml->setById('guest_nationality',$data['guest_nationality']);
         $guestDataNodes = $this->guestNodes();
-        $guestNode = $this->xml->createCloneElementById('guest');
+        $guestNode = $this->xml->cloneElementById('guest');
         $guestsNode = $this->xml->getElementById('guests');
         $guestsNode->removeAttribute('id');
         foreach ($data['guests'] as $guest) {
@@ -30,7 +30,7 @@ class HotelBookInnerRequestBuilder extends InnerRequestBuilder
         $this->xml->setById('hotel_code', $data['hotel_code']);
         $this->xml->setById('hotel_name', $data['hotel_name']);
         $hotelRoomDataNodes = $this->hotelRoomNodes();
-        $hotelRoomNode = $this->xml->createCloneElementById('hotel_room');
+        $hotelRoomNode = $this->xml->cloneElementById('hotel_room');
         $hotelRoomsNode = $this->xml->getElementById('hotel_rooms');
         $hotelRoomsNode->removeAttribute('id');
         foreach ($data['hotel_rooms'] as $hotel_room) {
@@ -40,21 +40,21 @@ class HotelBookInnerRequestBuilder extends InnerRequestBuilder
 
     private function guestNodes()
     {
-        $title = $this->xml->createCloneElementById('title');
-        $first_name = $this->xml->createCloneElementById('first_name');
-        $last_name = $this->xml->createCloneElementById('last_name');
-        $age = $this->xml->createCloneElementById('age');
+        $title = $this->xml->cloneElementById('title');
+        $first_name = $this->xml->cloneElementById('first_name');
+        $last_name = $this->xml->cloneElementById('last_name');
+        $age = $this->xml->cloneElementById('age');
         return compact('title', 'first_name', 'last_name', 'age');
     }
 
     private function hotelRoomNodes()
     {
-        $room_index = $this->xml->createCloneElementById('room_index');
-        $room_type_name = $this->xml->createCloneElementById('room_type_name');
-        $room_type_code = $this->xml->createCloneElementById('room_type_code');
-        $rate_plan_code = $this->xml->createCloneElementById('rate_plan_code');
-        $room_rate = $this->xml->createCloneElementById('room_rate');
-        $supplements = $this->xml->createCloneElementById('supplements');
+        $room_index = $this->xml->cloneElementById('room_index');
+        $room_type_name = $this->xml->cloneElementById('room_type_name');
+        $room_type_code = $this->xml->cloneElementById('room_type_code');
+        $rate_plan_code = $this->xml->cloneElementById('rate_plan_code');
+        $room_rate = $this->xml->cloneElementById('room_rate');
+        $supplements = $this->xml->cloneElementById('supplements');
         return compact('room_index', 'room_type_name', 'room_type_code', 'rate_plan_code', 'room_rate', 'supplements');
     }
 
