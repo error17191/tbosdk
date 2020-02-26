@@ -23,6 +23,7 @@ class SearchHotelsInnerRequestBuilder extends InnerRequestBuilder
         if(!empty($data['Filters'])){
             $this->setDataToXML($data['Filters']);
         }
+        $this->xml->setById('NoOfRooms',count($data['Rooms']));
         unset($data['Filters']);
         unset($data['Rooms']);
         $this->setDataToXML($data);
