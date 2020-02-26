@@ -27,6 +27,7 @@ class XML
     public function __construct(string $XMLString)
     {
         $this->XMLString = $XMLString;
+        $this->build();
     }
 
     /**
@@ -168,6 +169,22 @@ class XML
     public function createElement(string $name,string $value = null,string $nameSpace = 'hot:')
     {
         return $this->xmlDoc->createElement($nameSpace . $name, $value);
+    }
+
+    /**
+     * @return \DOMXPath
+     */
+    public function xPath()
+    {
+        return $this->xPath;
+    }
+
+    /**
+     * @return \DOMDocument
+     */
+    public function xmlDoc()
+    {
+        return $this->xmlDoc;
     }
 
     /**
